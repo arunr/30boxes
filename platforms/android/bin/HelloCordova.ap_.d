@@ -55,8 +55,12 @@ C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\images\-¼.png \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\images\+»¦n.png \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\images\+ó-ª.png \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\angular \
+C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\angular-moment.js \
+C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\app.js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\bootstrap.js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\bootstrap.min.js \
+C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\moment.js \
+C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\underscore.js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\angular\angular-animate.js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\angular\angular-animate.min.js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js\angular\angular-animate.min.js.map \

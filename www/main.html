@@ -6,6 +6,10 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">	
 		<title>30Boxes</title>
 		<script src="js/angular/angular.js"></script>
+
+		<script src="js/moment.js"></script>
+		<script src="js/angular-moment.js"></script>
+		<script src="js/underscore.js"></script>
 		<script src="js/app.js"></script>
 		<link rel="stylesheet" href="css/bootstrap-yeti.css">		
 	</head>
@@ -13,26 +17,44 @@
 		<div class="page-header">
 			<h3>30 boxes <small> | log your feelings</small></h3>
 		</div>
-		<div class="alert alert-info"><h4>how are you feeling?</h4></div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-success" ng-click=log('happy')><img src="images/happy.png"><br/>happy</button></div>
-			<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-warning" ng-click=log('energetic')><img src="images/excited.png"><br/>energetic</button></div>
-		</div>
-		<div class="row" style="padding-top:20px"></div>
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-primary" ng-click=log('sad')><img src="images/sad.png"><br/>sad</button></div>
-			<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-danger" ng-click=log('angry')><img src="images/angry.png"><br/>angry</button></div>
-		</div>
 
-		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-		  <div class="row">
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-warning" style="padding:0px !important; margin: 0px !important">9</button></div>
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-success" style="padding:0px !important; margin: 0px !important">10</button></div>
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-success" style="padding:0px !important; margin: 0px !important">11</button></div>
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-danger" style="padding:0px !important; margin: 0px !important">12</button></div>
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-primary" style="padding:0px !important; margin: 0px !important">13</button></div>
-		  	<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black"><button class="btn btn-block btn-primary" style="padding:0px !important; margin: 0px !important">14</button></div>		  	
-		  </div>
-		</nav>
+		<div ng-show="show_details === false">
+			<div class="alert alert-info"><h4>how are you feeling?</h4></div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-success" ng-click=log('happy')><img src="images/happy.png"><br/>happy</button></div>
+				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-warning" ng-click=log('energetic')><img src="images/excited.png"><br/>energetic</button></div>
+			</div>
+			<div class="row" style="padding-top:20px"></div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-primary" ng-click=log('sad')><img src="images/sad.png"><br/>sad</button></div>
+				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-danger" ng-click=log('angry')><img src="images/angry.png"><br/>angry</button></div>
+			</div>
+
+			<div class="row" style="padding-top:20px"></div>
+			<div class="alert alert-success" ng-show="show_message">thank you for sharing your feeling!</div>
+
+			<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+			  <div class="row" >
+		  		<div ng-repeat="day in last6days()">
+					<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black">
+						<button class="btn btn-block btn-{{day.feeling}}" style="padding:0px !important; margin: 0px !important" ng-click="show_day(day.long_date);">{{day.date}}</button>
+					</div>					  	
+		  		</div>
+			  </div>
+			</nav>
+		</div>
+		<div ng-show="show_details===true">
+			<div class="container">
+				<div class="alert alert-info"><h4>Log for {{selected_date| amDateFormat:'MMMM Do YYYY'}}</h4></div>
+				<table class="table table-striped">
+					<tr ng-repeat="item in details">
+						<td>{{item.date | amDateFormat:'h:mm:ss a'}}</td>
+						<td class="{{feeling_to_class(item.feeling)}}">{{item.feeling}}</td>
+					</tr>
+				</table>				
+				<hr/>
+				<button class="btn btn-lg btn-warning" ng-click="show_details = false">Back</button>
+			</div>
+		</div>
 	</body>
 </html>
