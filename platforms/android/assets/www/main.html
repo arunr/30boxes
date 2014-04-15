@@ -24,13 +24,13 @@
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-success" ng-click=log('happy')><img src="images/happy.png"><br/>happy</button></div>
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-warning" ng-click=log('energetic')><img src="images/excited.png"><br/>energetic</button></div>
 			</div>
-			<div class="row" style="padding-top:20px"></div>
+			<div class="row" style="padding-top:10px"></div>
 			<div class="row">
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-primary" ng-click=log('sad')><img src="images/sad.png"><br/>sad</button></div>
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-danger" ng-click=log('angry')><img src="images/angry.png"><br/>angry</button></div>
 			</div>
 
-			<div class="row" style="padding-top:20px"></div>
+			<div class="row" style="padding-top:10px"></div>
 			<div class="alert alert-success" ng-show="show_message">thank you for sharing your feeling!</div>
 
 			<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
@@ -45,7 +45,7 @@
 		</div>
 		<div ng-show="show_details===true">
 			<div class="container">
-				<div class="alert alert-info"><h4>Log for {{selected_date| amDateFormat:'MMMM Do YYYY'}}</h4></div>
+				<div class="alert alert-info"><h4>log for {{selected_date| amDateFormat:'MMMM Do YYYY'}}</h4></div>
 				<table class="table table-striped">
 					<tr ng-repeat="item in details">
 						<td>{{item.date | amDateFormat:'h:mm:ss a'}}</td>
@@ -53,7 +53,7 @@
 					</tr>
 				</table>				
 				<hr/>
-				<button class="btn btn-lg btn-warning" ng-click="show_details = false">Back</button>
+				<button class="btn btn-lg btn-warning" ng-click="show_details = false">back</button>
 			</div>
 		</div>
 	</body>
