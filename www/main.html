@@ -11,7 +11,7 @@
 		<script src="js/angular-moment.js"></script>
 		<script src="js/underscore.js"></script>
 		<script src="js/app.js"></script>
-		<link rel="stylesheet" href="css/bootstrap-yeti.css">		
+		<link rel="stylesheet" href="css/bootstrap-cosmo.css">		
 	</head>
 	<body class="container" ng-controller="BoxesCtrl">
 		<div class="page-header">
@@ -19,7 +19,7 @@
 		</div>
 
 		<div ng-show="show_details === false">
-			<div class="alert alert-info"><h4>how are you feeling?</h4></div>
+			<h4>how are you feeling?</h4>
 			<div class="row">
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-success" ng-click=log('happy')><img src="images/happy.png"><br/>happy</button></div>
 				<div class="col-xs-6 col-sm-6 col-md-6"><button class="btn btn-lg btn-block btn-warning" ng-click=log('energetic')><img src="images/excited.png"><br/>energetic</button></div>
@@ -47,7 +47,7 @@
 			<div class="container">
 				<div class="alert alert-info"><h4>log for {{selected_date| amDateFormat:'MMMM Do YYYY'}}</h4></div>
 				<table class="table table-striped">
-					<tr ng-repeat="item in details">
+					<tr ng-repeat="item in details track by $index">
 						<td>{{item.date | amDateFormat:'h:mm:ss a'}}</td>
 						<td class="{{feeling_to_class(item.feeling)}}">{{item.feeling}}</td>
 					</tr>

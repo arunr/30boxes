@@ -21,6 +21,7 @@ C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\images \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\index.html \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\js \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\main.html \
+C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\css\bootstrap-cosmo.css \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\css\bootstrap-cyborg.css \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\css\bootstrap-theme.css \
 C:\Users\arunr\Lab\Projects\30Boxes\platforms\android\assets\www\css\bootstrap-theme.css.map \
