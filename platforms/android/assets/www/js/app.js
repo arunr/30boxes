@@ -2,7 +2,13 @@ var thirtyboxes = angular.module('thirtyboxes', ['angularMoment']);
 
 thirtyboxes.factory('storageSvc', function ($window) {
 	var storageSvc = {};
-	storageSvc.storage = JSON.parse($window.localStorage.getItem('thirtyboxes')) || {};	
+	var ls = $window.localStorage.getItem('thirtyboxes');
+	if (ls !== null) {
+		storageSvc.storage = JSON.parse(ls);		
+	} else {
+		storageSvc.storage = {};
+	}
+	
 	storageSvc.setStorage = function(thing) {
 		$window.localStorage.setItem('thirtyboxes', thing);
 	};
@@ -13,7 +19,13 @@ thirtyboxes.factory('storageSvc', function ($window) {
 
 thirtyboxes.factory('dateSvc', function($window) {
 	var dateSvc = {};
-	var storage = JSON.parse($window.localStorage.getItem('thirtyboxes')) || {};	
+	var storage = {};
+	var ls = $window.localStorage.getItem('thirtyboxes');
+	if (ls !== null) {
+		storage = JSON.parse(ls);		
+	} else {
+		storage = {};
+	}	
 
 	var feeling = function(day) {
 		var max = "";

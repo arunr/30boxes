@@ -2,7 +2,13 @@ var thirtyboxes = angular.module('thirtyboxes', ['angularMoment']);
 
 thirtyboxes.factory('storageSvc', function ($window) {
 	var storageSvc = {};
-	storageSvc.storage = JSON.parse($window.localStorage.getItem('thirtyboxes')) || {};	
+	var ls = $window.localStorage.getItem('thirtyboxes');
+	if (ls !== null) {
+		storageSvc.storage = JSON.parse(ls);		
+	} else {
+		storageSvc.storage = {};
+	}
+	
 	storageSvc.setStorage = function(thing) {
 		$window.localStorage.setItem('thirtyboxes', thing);
 	};
@@ -13,17 +19,31 @@ thirtyboxes.factory('storageSvc', function ($window) {
 
 thirtyboxes.factory('dateSvc', function($window) {
 	var dateSvc = {};
-	var storage = JSON.parse($window.localStorage.getItem('thirtyboxes')) || {};	
+	var storage = {};
+	var ls = $window.localStorage.getItem('thirtyboxes');
+	if (ls !== null) {
+		storage = JSON.parse(ls);		
+	} else {
+		storage = {};
+	}	
 
 	var feeling = function(day) {
 		var max = "";
 		function getMax(day) {
-			return _.reduce(day, function(memo, num, key) { return num > memo.value ? {feeling:key, value:num} : memo; }, {feeling:'', value:0})
+			var d = {
+				happy: day.happy,
+				angry: day.angry,
+				energetic: day.energetic,
+				sad: day.sad
+			};
+
+			return _.reduce(d, function(memo, num, key) { return num > memo.value ? {feeling:key, value:num} : memo; }, {feeling:'', value:0})
 		}
 
 		if (day === {}) {
 			return '';
 		} else {
+			console.log(getMax(day));
 			max = getMax(day).feeling;
 			if (max === 'happy') {
 				return 'success';
@@ -39,18 +59,24 @@ thirtyboxes.factory('dateSvc', function($window) {
 		}
 	};
 
-	dateSvc.last6days = function() {
-		var i, day, a_day;
+	dateSvc.last6days = function(s) {
+		var i, day, a_day, n_day = {};
 		var days = [];
 
 		for (i = 0; i < 6; i++)	 {
 			day = moment().subtract('days', i);
-			a_day = storage[day.format('L')] || {};
+			if (s) {
+				a_day = s[day.format('L')] || {};
+			} else {
+				a_day = storage[day.format('L')] || {};	
+			}
+			
 			a_day.feeling = feeling(a_day);		
 			a_day.date = day.format('DD');
 			a_day.long_date = day.format('L');
 			days.push(a_day);
 		}
+		console.log(days);
 		return days.reverse();
 	};
 
@@ -62,6 +88,7 @@ function BoxesCtrl($scope, $timeout, storageSvc, dateSvc) {
 	$scope.show_details = false;
 	$scope.selected_date = "";
 	$scope.details = [];
+	$scope.last6days = dateSvc.last6days(); 
 	$scope.log = function(state) {
 		$scope.show_message = true;
 		$timeout(function() {
@@ -78,14 +105,10 @@ function BoxesCtrl($scope, $timeout, storageSvc, dateSvc) {
 
 		storage[today] = storage[today] || {};
 		storage[today][state] = storage[today][state] + 1 || 1;
-		console.log(storage);
 		storageSvc.setStorage(JSON.stringify(storage));
+		$scope.last6days = dateSvc.last6days(storage); 
+		//console.log($scope.last6days);
 	};
-
-	var last6 = dateSvc.last6days();
-	$scope.last6days = function() {
-		return last6;
-	}
 
 	$scope.show_day = function(date) {	
 		$scope.show_details = true;
@@ -97,7 +120,7 @@ function BoxesCtrl($scope, $timeout, storageSvc, dateSvc) {
 	};
 
 	$scope.feeling_to_class = function(max) {
-		console.log(max);
+		//console.log(max);
 		if (max === 'happy') {
 			return 'success';
 		} else if (max === 'sad') {

@@ -35,7 +35,7 @@
 
 			<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			  <div class="row" >
-		  		<div ng-repeat="day in last6days()">
+		  		<div ng-repeat="day in last6days">
 					<div class="col-xs-2 col-sm-2 col-md-2" style="padding:0px !important; margin: 0px !important; border-right:1px solid black">
 						<button class="btn btn-block btn-{{day.feeling}}" style="padding:0px !important; margin: 0px !important" ng-click="show_day(day.long_date);">{{day.date}}</button>
 					</div>					  	
